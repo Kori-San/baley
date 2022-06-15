@@ -50,3 +50,6 @@ Baley also offer you a stable AWX installation using persistent volume for Postg
 # Dependencies for Baley
 - make
 - docker
+
+# About
+Kori-San - 2022. If you enjoyed Baley please check ['$ gpro'](https://github.com/Kori-San/gpro) which a command line tool too, but for OpenProject!
