@@ -1,0 +1,53 @@
+
+# -> A function that is used to complete files in the current directory.
+_baley_files_compgen()
+{
+    local cur=""
+    local base_dir="./"
+    _get_comp_words_by_ref cur;
+    cur="${base_dir}${cur}"
+    _filedir
+    COMPREPLY=("${COMPREPLY[@]#${base_dir}}")
+}
+
+# -> A function that is used to complete the baley command.
+_baley_completions()
+{
+    # ~> Vars
+    local baley_cmds="bash build build-ui certs clean clone config deploy edit fix help ls kill logs network pkg ports"
+    local issues="nginx markupsafe config"
+    # ~> Completions -- baley [command]
+    if [ "${#COMP_WORDS[@]}" = "2" ]; then
+        COMPREPLY=($(compgen -W "${baley_cmds}" "${COMP_WORDS[1]}"))
+    # ~> Completions -- baley [command] [argument]
+    elif [ "${#COMP_WORDS[@]}" = "3" ]; then
+        if [ "${COMP_WORDS[1]}" = "ports" ]; then
+            COMPREPLY=($(compgen -W "http= https=" "${COMP_WORDS[2]}"))
+        elif [ "${COMP_WORDS[1]}" = "edit" ] || [ "${COMP_WORDS[1]}" = "config" ] ; then
+            COMPREPLY=($(compgen -W "ls" "${COMP_WORDS[2]}"))
+        elif [ "${COMP_WORDS[1]}" = "fix" ]; then
+            COMPREPLY=($(compgen -W "${issues}" "${COMP_WORDS[2]}"))
+        elif [ "${COMP_WORDS[1]}" = "certs" ]; then
+            _baley_files_compgen
+        elif [ "${COMP_WORDS[1]}" = "bash" ] || [ "${COMP_WORDS[1]}" = "kill" ] || [ "${COMP_WORDS[1]}" = "logs" ]; then
+            COMPREPLY=($(compgen -W "$(docker ps --format "{{ .Names }}")" "${COMP_WORDS[2]}"))
+        fi
+    # ~> Completions -- baley [certs] [GIVEN_ARG] [argument]
+    elif [ "${#COMP_WORDS[@]}" = "4" ]; then
+        if [ "${COMP_WORDS[1]}" = "certs" ]; then
+            _baley_files_compgen
+        fi
+    # ~> Completions -- baley [ports] [GIVEN_ARG] [argument]
+    elif [ "${#COMP_WORDS[@]}" = "5" ]; then
+        if [ "${COMP_WORDS[2]}" = "http" ]; then
+            COMPREPLY=($(compgen -W "https=" "${COMP_WORDS[4]}"))
+        elif [ "${COMP_WORDS[2]}" = "https" ]; then
+            COMPREPLY=($(compgen -W "http=" "${COMP_WORDS[4]}"))
+        fi
+    else
+        return
+    fi
+}
+
+# -> Telling the shell to use the function '_baley_completions' to complete the command '$ baley'.
+complete -F _baley_completions baley
