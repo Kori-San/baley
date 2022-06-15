@@ -17,7 +17,7 @@ Baley also offer you a stable AWX installation using persistent volume for Postg
 - You can finally use Baley! You can seek help using: ```$ baley help```
 
 # How to simply install AWX with Baley ?
-- First you need to [install Baley]().
+- First you need to [install Baley](https://github.com/Kori-San/baley/blob/main/README.md#how-to-install-baley-).
 - Afterwards you should clone AWX's repo using: ```$ baley clone```
 - When the repo is cloned you can begin the build: ```$ baley build```
 - After the build you can deploy your AWX's environnement: ```$ baley deploy```
