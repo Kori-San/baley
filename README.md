@@ -24,3 +24,29 @@ Baley also offer you a stable AWX installation using persistent volume for Postg
 - Baley will show the URL for both http and https.
 - After the build you can begin the build of the AWX's Web UI ```$ baley build-ui```
 - Enjoy!
+
+# Which commands can I use ?
+    $ baley bash [OPTIONNAL DOCKER]        # Begin a bash session on ${main_docker} or given argument.
+    $ baley build                          # Build all images needed by AWX.
+    $ baley build-ui                       # Build / Rebuild AWX's User Interface.
+    $ baley certs PUBLIC_CERT PRIVATE_KEY  # Copy both arguments as 'nginx.crt' and 'nginx.key' on ${main_docker}.
+    $ baley clean                          # Clean all images.
+    $ baley clone                          # Clone AWX v.${awx_version} from ${awx_git}.
+    $ baley config                         # Open config file of Baley.
+    $ baley deploy                         # Deploy or Re-Deploy AWX Cluster.
+    $ baley edit [ls]                      # Edit docker-compose.yml.j2 while creating a backup file or list backup files.
+    $ baley fix  [ISSUE]                   # Apply an automated fix for a know issue.
+      ├─── nginx                            ~ Fix Unreachable Web UI caused by nginx service not launching.
+      ├─── markupsafe                       ~ Fix Web UI being reachable but not usable even after build.
+      └─── config                           ~ Fix error when loading docker config file.
+    $ baley help                           # Display help without error.
+    $ baley ls                             # Display list of awx-related running dockers.
+    $ baley kill [OPTIONNAL DOCKER]        # Kill gracefully all AWX-related docker or given argument.
+    $ baley logs [OPTIONNAL DOCKER]        # Display logs of ${main_docker} or given argument.
+    $ baley network                        # Display network information about AWX cluster.
+    $ baley pkg                            # Install and Upgrade all dependencies.
+    $ baley ports http=NUM | https=NUM     # Change HTTP and/or HTTPS ports.
+
+# Dependencies for Baley
+- make
+- docker
