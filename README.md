@@ -1,4 +1,4 @@
-# baley
+# Baley: An AWX Utilitary Tool
 An easy to use command line used for AWX's installation and maintenance.
 
 # What is Baley ?
