@@ -202,7 +202,7 @@ elif [ "${argument,,}" == "config" ]; then
         ls -a "${conf_dir}" | grep ".conf" | sort | head -n -"$save" |  sed "s@^@${conf_dir}/@g" | xargs -rd '\n' rm -fr
         # ~> Create Backup file.
         backup_timestamp=$(date '+%H:%M:%S-%d_%m_%Y')
-        cp "${docker_compose_path}" "${conf_dir}/baley.${backup_timestamp}.conf" || error_print "Failed to create backup file"
+        cp "${conf_path}" "${conf_dir}/baley.${backup_timestamp}.conf" || error_print "Failed to create backup file"
         "${EDITOR}" "${conf_path}"
         echo -e "Backup file created in ${conf_dir}/baley.${backup_timestamp}.conf"
     # ~> If there is 2 arguments and the second one is ls it will list backup files.
