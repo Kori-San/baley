@@ -12,7 +12,7 @@ Baley also offer you a stable AWX installation using persistent volume for Postg
 
 # How to install Baley ?
 - First you'll need to clone this repo: ```$ git clone https://github.com/Kori-San/baley.git```
-- Then cd into the repo and install Baley (You can run make without sudo): ```$ cd baley/ && sudo make install```
+- cd into the repo and make install, make sure to be root: ```$ cd baley/ && sudo make install```
 - Once the previous task is finished you can configure baley: ```$ baley config```
 - You can finally use Baley! You can seek help using: ```$ baley help```
 
