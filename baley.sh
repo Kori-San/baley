@@ -8,7 +8,13 @@
 ##############
 # Init
 
-conf_path="${HOME}/.config/baley/baley.conf"
+if [ -z $SUDO_USER ]; then # If the user is not root, we set home to normal home
+    home="$HOME"
+else # If the user is sudo, then the home directory is /home/$SUDO_USER
+    home="/home/$SUDO_USER"
+fi
+
+conf_path="${home}/.config/baley/baley.conf"
 # ↳ Path to config file - Default: ~/.config/baley/baley.conf
 
 source "${conf_path}" || error_print "Config file not found"
