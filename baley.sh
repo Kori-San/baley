@@ -366,7 +366,7 @@ elif [ "${argument,,}" == "pkg" ]; then
             echo "Checking dependencies"
             apt-get update -y > /dev/null
             # ~> Checking if the packages are installed.
-            pkgs=("python3.9" "python3-pip" "docker-compose" "docker.io" "ansible" "openssl" "pass" "gnupg2" "gzip" "conntrack")
+            pkgs=("python3.8" "python3-pip" "docker-compose" "docker.io" "ansible" "openssl" "pass" "gnupg2" "gzip" "conntrack")
             for package in ${pkgs[@]}; do
                 pkg_check "${package}"
             done
